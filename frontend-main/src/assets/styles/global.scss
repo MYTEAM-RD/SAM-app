@@ -1,0 +1,68 @@
+@import "./theme.scss";
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+body{
+    margin: 0;
+    background-color: white;
+}
+
+a{
+    font-family: "ubuntu", sans-serif;
+}
+
+.bigButton{
+    height: fit-content;
+    margin: auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px 15px;
+    border-radius: 5px;
+
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    background-color: $blue;
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+    border: 1px solid transparent;
+
+    &.empty{
+        background-color: transparent;
+        color: $blue;
+        padding: 13px 15px;
+        border: 3px solid $blue;
+
+        &:hover{
+            background-color: rgba($color: $blue, $alpha: .75);
+            border-color: rgba($color: $blue, $alpha: .75);
+            color: white;
+        }
+    }
+
+    &:hover{
+        background-color: rgba($color: $blue, $alpha: .75);
+    }
+}
+
+h1, h2, h3, h4, h5, h6, p, li{
+    font-family: "ubuntu", sans-serif;
+    margin: 0;
+}
+
+.littleTitle{
+    font-family: Ubuntu;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 200px 0;
+}

@@ -1,0 +1,71 @@
+@import "../../assets/styles/theme.scss";
+
+.signup{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    background-color: $bg;
+
+    img{
+        width: 50%;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        &.password{
+            margin: 0 auto;
+            width: fit-content;
+
+            ul{
+                margin-right: auto;
+            }
+
+            label{
+                margin-right: auto;
+                font-family: Ubuntu, sans-serif;
+            }
+
+            input{
+                margin-right: auto;
+            }
+
+            .connect{
+                margin-right: auto;
+            }
+        }
+
+        h1{
+            font-size: 38px;
+            font-style: normal;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        input,select{
+            width: 300px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 0;
+        }
+
+        select{
+            width: 330px;
+            background-color: white;
+        }
+
+        .connect{
+            margin: 0;
+            border: 0;
+            width: 250px;
+        }
+    }
+}

@@ -1,0 +1,138 @@
+@import "../../assets/styles/theme.scss";
+
+.howItWork{
+    margin: 125px calc(2* $marge);
+    width: calc(100% - 4 * $marge);
+
+    section{
+        display: flex;
+        flex-direction: row;
+        margin-top: 40px ;
+        gap: 150px;
+
+        .text{
+
+            h4{
+                font-size: 21px;
+                font-style: normal;
+                font-weight: 500;
+                margin-bottom: 10px;
+
+                &:nth-child(4){
+                    margin-top: 80px;
+                }
+            }
+
+            p,li{
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+            }
+
+            a{
+                margin-top: 20px;
+                width: fit-content;
+            }
+        }
+
+        .step{
+            display: grid;
+            grid-template-columns: 40px auto;
+            column-gap: 40px;
+            row-gap: 40px;
+
+            div{
+                h4{
+                    margin-bottom: 15px;
+                }
+            }
+            
+            span{
+                background-color: $orange;
+                border-radius: 100px;
+                height: 40px;
+                width: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Ubuntu, sans-serif;
+                font-weight: 700;
+                color: white;
+                grid-column: 1;
+                transition: all 0.3s ease-in-out;
+                cursor: default;
+
+                &:hover{
+                    transform: scale(1.1);
+                }
+
+                &:nth-child(1){
+                    grid-row: 1;
+                }
+
+                &:nth-child(3){
+                    grid-row: 2;
+                }
+
+                &:nth-child(5){
+                    grid-row: 3;
+                }
+
+                &:nth-child(7){
+                    grid-row: 4;
+                }
+            }
+
+            .line{
+                background-color: $orange;
+                grid-row: 1/5;
+                grid-column: 1;
+                width: 2px;
+                display: flex;
+                margin: 0 19px;
+                z-index: -1;
+                height: 85%;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 1000px) {
+
+    .howItWork{
+        margin: 20px;
+        width: calc(100% - 40px);
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+
+        h1{
+            text-align: center;
+            font-size: 39px;
+            max-width: 75%;
+        }
+
+        section{
+            flex-direction: column;
+
+            gap: 80px;
+
+            .text{
+                a{
+                    display: none;
+                }
+
+                h4{
+                    text-align: center;
+                }
+
+                p{
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+}

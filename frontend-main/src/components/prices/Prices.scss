@@ -1,0 +1,163 @@
+@import "../../assets/styles/theme.scss";
+
+.prices{
+    padding: 100px calc(2* $marge);
+    background-color: $bg;
+
+    .account-btn{
+        font-family: Ubuntu, sans-serif;
+        background-color: $blue;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        margin-top: 10px;
+    }
+
+    >p{
+        margin-top: 15px;
+        width: 75%;
+    }
+
+    .itemList{
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
+        margin: 75px 0;
+        
+        .item{
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            width: 225px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.15s ease-in-out;
+
+            &:hover{
+                //backdrop shadow
+                box-shadow:  10px 10px 20px #bebebe45,
+            }
+
+            h4{
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+            }
+
+            > div{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: baseline;
+                gap: 5px;
+                width: 100%;
+                margin-top: 5px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid $black;
+                margin-bottom: 10px;
+                
+                h4{
+                    font-size: 38px;
+                    font-style: normal;
+                    font-weight: 700;
+                }
+
+                h5{
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                }
+            }
+
+            .buy{
+
+                display: flex;
+
+                > .main-btn{
+                font-family: Ubuntu, sans-serif;
+                background-color: $blue;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+
+                    &.multiples{
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                    }
+                }
+
+                .selector{
+                    display: flex;
+                    flex-direction: column;
+
+                    button{
+                        background-color: white;
+                        border: 2px solid $blue;
+                        width: 30px;
+                        cursor: pointer;
+                        color: $blue;
+                        
+                        &:nth-child(1){
+                            border-top-right-radius: 5px;
+                            border-bottom: 0;
+                        }
+
+                        &:nth-child(2){
+                            border-bottom-right-radius: 5px;
+                        }
+                    }
+                }
+
+            }
+
+            p{
+                height: 100px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 1000px) {
+
+    .prices{
+        padding: 20px;
+        margin-top: 80px;
+        width: calc(100% - 40px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        h1{
+            font-size: 39px;
+        }
+        
+        .itemList{
+            flex-direction: column;
+
+            .item{
+                p{
+                    height: fit-content;
+                }
+
+                button{
+                    display: none;
+                }
+            }
+        }
+    }
+}

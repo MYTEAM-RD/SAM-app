@@ -1,0 +1,36 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+	<title>file-svg</title>
+	<defs>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+			<path d="m8.7 0.71c-0.38-0.39-1.02-0.39-1.4 0-0.4 0.38-0.4 1.02-0.01 1.41l4.88 4.88h-11.17c-0.55 0-1 0.45-1 1 0 0.55 0.45 1 1 1h11.17l-4.88 4.88c-0.39 0.39-0.39 1.03 0.01 1.41 0.38 0.39 1.02 0.39 1.4 0l7.3-7.29z"/>
+		</clipPath>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp2">
+			<path d="m277.71 0.71c-0.39-0.39-1.03-0.39-1.42 0-0.39 0.38-0.39 1.02 0 1.41l4.88 4.88h-11.17c-0.55 0-1 0.45-1 1 0 0.55 0.45 1 1 1h11.17l-4.88 4.88c-0.39 0.39-0.39 1.03 0 1.41 0.39 0.39 1.03 0.39 1.42 0l7.29-7.29z"/>
+		</clipPath>
+		<clipPath clipPathUnits="userSpaceOnUse" id="cp3">
+			<path d="m-283.29 0.71c-0.39-0.39-1.03-0.39-1.42 0-0.38 0.38-0.38 1.02 0 1.41l4.88 4.88h-11.17c-0.55 0-1 0.45-1 1 0 0.55 0.45 1 1 1h11.17l-4.88 4.88c-0.38 0.39-0.38 1.03 0 1.41 0.39 0.39 1.03 0.39 1.42 0l7.29-7.29z"/>
+		</clipPath>
+	</defs>
+	<style>
+		.s0 { opacity: .7;fill: #000000 } 
+		.s1 { fill: #c2d1d9 } 
+	</style>
+	<path id="Layer" fill-rule="evenodd" class="s0" d="m8.7 0.7c-0.4-0.4-1-0.4-1.4 0-0.4 0.4-0.4 1 0 1.4l4.9 4.9h-11.2c-0.6 0-1 0.4-1 1 0 0.6 0.4 1 1 1h11.2l-4.9 4.9c-0.4 0.4-0.4 1 0 1.4 0.4 0.4 1 0.4 1.4 0l7.3-7.3z"/>
+	<g id="Clip-Path" clip-path="url(#cp1)">
+		<g id="Layer">
+			<path id="Layer" class="s1" d="m-4-4h24v24h-24z"/>
+		</g>
+	</g>
+	<path id="Layer" fill-rule="evenodd" class="s0" d="m277.7 0.7c-0.4-0.4-1-0.4-1.4 0-0.4 0.4-0.4 1 0 1.4l4.9 4.9h-11.2c-0.6 0-1 0.4-1 1 0 0.6 0.4 1 1 1h11.2l-4.9 4.9c-0.4 0.4-0.4 1 0 1.4 0.4 0.4 1 0.4 1.4 0l7.3-7.3z"/>
+	<g id="Clip-Path" clip-path="url(#cp2)">
+		<g id="Layer">
+			<path id="Layer" class="s1" d="m265-4h24v24h-24z"/>
+		</g>
+	</g>
+	<path id="Layer" fill-rule="evenodd" class="s0" d="m-283.3 0.7c-0.4-0.4-1-0.4-1.4 0-0.4 0.4-0.4 1 0 1.4l4.9 4.9h-11.2c-0.6 0-1 0.4-1 1 0 0.6 0.4 1 1 1h11.2l-4.9 4.9c-0.4 0.4-0.4 1 0 1.4 0.4 0.4 1 0.4 1.4 0l7.3-7.3z"/>
+	<g id="Clip-Path" clip-path="url(#cp3)">
+		<g id="Layer">
+			<path id="Layer" class="s1" d="m-296-4h24v24h-24z"/>
+		</g>
+	</g>
+</svg>

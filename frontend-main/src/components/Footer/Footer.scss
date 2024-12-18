@@ -1,0 +1,55 @@
+@import "../../assets/styles/theme.scss";
+
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    background-color: $bg;
+    border-top: 2px solid rgba($blue, 0.2);
+
+    > :nth-child(1){
+        
+        color: white;
+        padding: 20px 0;
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        text-transform: uppercase;
+        
+
+        a{
+            text-decoration: none;
+            color: $black;
+        }
+    }
+
+    > :nth-child(2){
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 1000px) {
+
+    footer{
+
+        > :nth-child(1){
+            flex-direction: column;
+            gap: 10px;
+
+            :nth-child(4){
+                display: none;
+            }
+
+            :nth-child(5){
+                display: none;
+            }
+        }
+
+    }
+
+}

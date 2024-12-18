@@ -1,0 +1,33 @@
+.verification{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+
+    p{
+        margin-top: 15px;
+        margin-bottom: 40px;
+    }
+
+    .new{
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        button{
+            margin-top: 20px;
+            border: 0;
+        }
+
+        input,select{
+            width: 300px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+    }
+}

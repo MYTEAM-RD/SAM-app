@@ -1,0 +1,155 @@
+@import "../../assets/styles/theme.scss";
+
+.main-analysis{
+
+    margin: 0 calc(2*$marge);
+    margin-top: 75px;
+    margin-bottom: 75px;
+    min-height: 70vh;
+
+    h1{
+        margin-bottom: 50px;
+    }
+
+    a{
+        width: fit-content;
+        margin-top: 40px;
+        margin-left: auto;
+    }
+
+    .analysis{
+        display: grid;
+        grid-template-columns: 200px auto;
+        grid-row: auto auto;
+        border: 2px solid rgba($blue, 0.25);
+        border-radius: 5px;
+        padding: 40px;
+        gap: 40px;
+
+        svg{
+            width: 50px;
+            height: 50px;
+            color: #95a1a8;
+        }
+
+        .file{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            h3{
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            h4{
+                font-size: 12px;
+                font-weight: 500;
+                opacity: .5;
+            }
+
+            :nth-child(1){
+                display: flex;
+                gap: 40px;
+            }
+            
+        }
+
+        .content{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            h2{
+                font-size: 32px;
+                font-weight: 700;
+            }
+
+            h3{
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            :nth-child(1){
+                display: flex;
+                align-items: center;
+                gap: 40px;
+            }
+        }
+
+        .estimate{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            h3{
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+            >div{
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                input{
+                    border: 2px solid rgba($blue, 0.25);
+                    padding: 10px 15px;
+                    font-size: 14px;
+                    border-radius: 5px;
+                }
+
+                button{
+                    background-color: rgba($blue, 1);
+                    padding: 12px 15px;
+                    border-radius: 5px;
+                    border: none;
+                    color: white;
+                    font-size: 14px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all .2s ease-in-out;
+
+                    &.true{
+                        background-color: rgb(104, 184, 104);
+                        padding: 12px 40px;
+                    }
+
+                    &.false{
+                        background-color: rgb(224, 110, 110);
+                        padding: 12px 40px;
+                    }
+
+                    &.shake{
+                        animation: shake 0.4s ease-in-out;
+                    }
+                }
+            }
+        }
+    
+        >:nth-child(3){
+            grid-column: 2;
+            grid-row: 2;
+        }
+        
+    }
+
+}
+
+@keyframes shake {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  75% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

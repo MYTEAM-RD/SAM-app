@@ -1,0 +1,41 @@
+@import "../../assets/styles/theme.scss";
+
+.moncompte{
+    display: flex;
+    flex-direction: column;
+    margin: 50px calc(2* $marge);
+    min-height: 70vh;
+
+
+    .head{
+        display: flex;
+        gap: 20px;
+    }
+
+    .form{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        margin: 30px 0;
+
+        label{
+            margin-bottom: 10px;
+            font-family: Ubuntu, sans-serif;
+        }
+
+        input{
+            margin-bottom: 20px;
+            width: 300px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid $blue;
+        }
+    }
+
+    .save{
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+}

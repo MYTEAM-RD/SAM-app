@@ -1,0 +1,102 @@
+@import "../../assets/styles/theme.scss";
+
+nav{
+    background-color: $bg;
+    padding: 0 $marge;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 2 * $marge);
+    justify-content: space-between;
+    height: 80px;
+
+    .credit{
+        height: fit-content;
+        background-color: $blue;
+        border-radius: 5px;
+        border: 2px solid $blue;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 13px 10px;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    > div{
+        display: flex;
+        flex-direction: row;
+        width: 60%;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 100%;
+
+        a{
+            color: $black;
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase; // Add this line to make the font uppercase
+            font-size: 14px;
+
+            &.active{
+                color: $blue;
+                font-weight: 700;
+            }
+        }
+    }
+
+    img{
+        height: 100%;
+        max-height: 48px;
+        object-fit: contain;
+        margin: auto 0;
+    }
+}
+
+@media (max-width: 1000px) {
+    nav{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        padding-top: 20px;
+        width: 100vw;
+
+        div{
+            display: none;
+            width: 100%;
+
+            a{
+                max-width: 20%;
+                text-align: center;
+            }
+
+            :nth-child(1){
+                display: none;
+            }
+            :nth-child(4){
+                display: none;
+            }
+            :nth-child(5){
+                //display: none;
+            }:nth-child(6){
+                display: none;
+            }:nth-child(7){
+                display: none;
+            }
+        }
+
+        img{
+            max-height: 100px;
+            height: 100px;
+            max-width: 100px;
+            margin: 0 auto;
+            margin-bottom: 15px;
+        }
+
+        > a{
+            display: none !important;
+        }
+    }
+  }

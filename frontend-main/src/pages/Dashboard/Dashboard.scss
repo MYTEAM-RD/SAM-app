@@ -1,0 +1,71 @@
+@import "../../assets/styles/theme.scss";
+
+.dashboard{
+
+    margin: 100px $marge;
+    min-height: 70vh;
+
+
+    .none{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 100px 0;
+    }
+
+    .header{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+    }
+
+    table{
+        width: 100%;
+        font-family: Ubuntu, sans-serif;
+        border-collapse: collapse;
+        border-radius: 5px;
+        overflow: hidden;
+        thead{
+            background-color: rgba($blue, 0.75);
+            color: white;
+            border-collapse: collapse;
+            tr{
+                th{
+                    text-transform: uppercase;
+                    padding: 15px 0;
+                }
+            }
+        }
+        tbody{
+            tr{
+                cursor: pointer;
+                z-index: 1;
+
+                &:hover{
+                    background-color: rgba($blue, 0.05);
+                }
+
+                td{
+                    padding: 15px 0;
+                    text-align: center;
+
+                    .dot{
+                        border: 0;
+                        background-color: transparent;
+                        z-index: 10;
+                        
+                        svg{
+                            width: 20px;
+                            height: 20px;
+                            padding: 3px;
+                            border-radius: 20px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
