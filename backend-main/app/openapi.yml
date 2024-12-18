@@ -1,0 +1,1067 @@
+openapi: '3.0.2'
+info:
+  title: SAM API spec
+  version: '1.0'
+servers:
+  - url: /api/v1
+tags:
+  - name: Utils
+    description: Everything usefull but cannot be categorized V
+  - name: Authentication
+    description: Authentication and authorization V
+  - name: User
+    description: User related endpoints V
+  - name: Analysis
+    description: Analysis related endpoints V
+  - name: Payment
+    description: Payment related endpoints
+  - name: Verification
+    description: Verification related endpoints V
+security:
+  - bearerAuth: []  
+paths:
+  /health:
+    get:
+      tags:
+        - Utils
+      summary: Health check
+      description: Check if the API is up and running
+      security: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: OK
+  /contact:
+    post:
+      tags:
+        - Utils
+      summary: Contact
+      description: Send a contact message
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                from:
+                  type: string
+                  example: "example@gmail.com"
+                subject:
+                  type: string
+                  example: "subject"
+                phone:
+                  type: string
+                  example: "+33612345678"
+                content:
+                  type: string
+                  example: "content"
+      responses:
+        200:
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: sended
+        400:
+          description: Bad Request
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+
+  
+# AUTHENTICATION
+  /login:
+    post:
+      tags:
+        - Authentication
+      summary: Login
+      description: Login with email and password
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "example@gmail.com"
+                  format: email
+                password:
+                  type: string
+                  format: password
+                  example: "password"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        400:
+          description: Bad Request
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+  /check:
+    get:
+      tags:
+        - "Authentication"
+      summary: Check if the jwt provided is valid
+      description: Check if the jwt provided is valid
+      responses:
+        200:
+          description: the jwt is valid
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "ok"
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+
+# USER
+  /user/me:
+    get:
+      tags:
+        - User
+      summary: Get user information
+      description: Get user information
+      responses:
+        200:
+          description: user succesfully find
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-public'
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+  /user:
+    post:
+      tags:
+        - User
+      summary: Create a new user
+      description: Create a new user
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "test@gmail.com"
+                password:
+                  type: string
+                  format: password
+                  example: "password"
+                name:
+                  type: string
+                  example: "John Doe"
+                company:
+                  type: string
+                  example: "Company name"
+                company_type:
+                  type: string
+                  example: "Startup"
+                phone:
+                  type: string
+                  example: "+33612345678"
+              required:
+                - email
+                - password
+                - name
+      responses:
+        200:
+          description: user succesfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-public'
+        400:
+          description: Bad Request
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+    patch:
+      tags:
+        - User
+      summary: Update user information
+      description: Update user information
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "John Doe"
+                company:
+                  type: string
+                  example: "Company name"
+                company_type:
+                  type: string
+                  example: "Startup"
+                phone:
+                  type: string
+                  example: "+33612345678"
+                password:
+                  type: string
+                  format: password
+                  example: "password"
+      responses:
+        200:
+          description: user succesfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-public'
+        400:
+          description: Bad Request
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+    delete:
+      tags:
+        - User
+      summary: Delete user
+      description: Delete user
+      responses:
+        200:
+          description: user succesfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-public'
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+  /user/email:
+    patch:
+      tags:
+        - User
+      summary: Update user email
+      description: Update user email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "newemail@gmail.com"
+                  format: email
+              required:
+                - email
+      responses:
+        200:
+          description: user succesfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-public'
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+  /trouble/forgot_email:
+    get:
+      tags:
+        - User
+      summary: Send an email to the user with a link to reset his password
+      description: Send an email to the user with a link to reset his password
+      parameters:
+        - in: query
+          name: email
+          schema:
+            type: string
+            format: email
+            example: "test@gmail.com"
+          required: true
+          description: The email of the user
+      responses:
+        200:
+          description: Email sended to user email
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Email sended to user email
+        400:
+          description: Bad Request
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+    post:
+      tags:
+        - User
+      summary: Reset user password
+      description: Reset user password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  example: "3ab49c23-120b-4294-89df-27ad88deaf15"
+                password:
+                  type: string
+                  format: password
+                  example: "password"
+              required:
+                - code
+                - password
+      responses:
+        200:
+          description: user password succesfully reseted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-public'
+        400:
+          description: Missing required key
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+  /user/{user_id}:
+    delete:
+      tags:
+        - User
+      summary: Admin Delete user
+      description: Admin Delete user
+      parameters:
+        - in: path
+          name: user_id
+          schema:
+            type: string
+            format: uuid
+            example: "3ab49c23-120b-4294-89df-27ad88deaf15"
+          required: true
+          description: The id of the user
+      responses:
+        200:
+          description: user succesfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-public'
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+
+# VERIFICATION
+  /verify/email:
+    get:
+      tags:
+        - Verification
+      summary: Verify user email
+      description: Verify user email
+      security: []
+      parameters:
+        - in: query
+          name: code
+          schema:
+            type: string
+            example: "3ab49c23-120b-4294-89df-27ad88deaf15"
+          required: true
+          description: The code received by email
+      responses:
+        200:
+          description: user email succesfully verified
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        404:
+          description: the token is not valid
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Email verification failed"
+  /verify/new/email:
+    get:
+      tags:
+        - Verification
+
+      parameters:
+        - in: query
+          name: email
+          schema:
+            type: string
+            example: "test@gmail.com"
+          required: true
+          description: The code received by email
+      summary: Send a new verification email
+      description: Send a new verification email
+      responses:
+        200:
+          description: Email sended to user email
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: generated a new one
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Email verification failed"
+
+# ANALYSIS
+  /analyse:
+    post:
+      tags:
+        - Analysis
+      summary: Analyse a file
+      description: Analyse a file
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
+      responses:
+        200:
+          description: file succesfully analysed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis'
+        400:
+          description: Can't create analysis
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+    get:
+      tags:
+        - Analysis
+      summary: Get all analysis
+      description: Get all analysis
+      responses:
+        200:
+          description: analysis succesfully retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/analysis'
+        400:
+          description: Can't create analysis
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+  /analyse/{id}:
+    get:
+      tags:
+        - Analysis
+      summary: Get analysis by id
+      description: Get analysis by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+            example: "3ab49c23-120b-4294-89df-27ad88deaf15"
+          required: true
+          description: The id of the analysis
+      responses:
+        200:
+          description: analysis succesfully retrieved
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties:
+                  file:
+                    type: string
+                    format: binary
+        400:
+          description: Can't create analysis
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+        404:
+          description: Analysis not found
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+    delete:
+      tags:
+        - Analysis
+      summary: Delete analysis by id
+      description: Delete analysis by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+            example: "3ab49c23-120b-4294-89df-27ad88deaf15"
+          required: true
+          description: The id of the analysis
+      responses:
+        200:
+          description: analysis succesfully deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "ok"
+        400:
+          description: Can't create analysis
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+        404:
+          description: Analysis not found
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+  /analyse/{id}/report:
+    get:
+      tags:
+        - Analysis
+      summary: Get report by analysis id
+      description: Get report by analysis id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+            example: "3ab49c23-120b-4294-89df-27ad88deaf15"
+          required: true
+          description: The id of the analysis
+      responses:
+        200:
+          description: analysis rapport succesfully created
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties:
+                  file:
+                    type: string
+                    format: binary
+        404:
+          description: Analysis not found
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+  /analyse/{id}/info:
+    get:
+      tags:
+        - Analysis
+      summary: Get analysis info by id
+      description: Get analysis info by id
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+            example: "3ab49c23-120b-4294-89df-27ad88deaf15"
+          required: true
+          description: The id of the analysis
+      responses:
+        200:
+          description: analysis info succesfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/analysis'
+        400:
+          description: Can't create analysis
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+        404:
+          description: Analysis not found
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+  /analyse/{id}/estimate:
+    post:
+      tags:
+        - Analysis
+      summary: Try an estimation on an analysis
+      description: Try an estimation on an analysis
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+            example: "3ab49c23-120b-4294-89df-27ad88deaf15"
+          required: true
+          description: The id of the analysis
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                budget:
+                  type: number
+                  example: 1000
+                index:
+                  type: number
+                  format: int32
+                  example: 0
+      responses:
+        200:
+          description: analysis estimate succesfully retrieved
+          content:
+            text/plain:
+              schema:
+                type: boolean
+                example: "True"
+        400:
+          description: Can't create analysis
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+        401:
+          description: Unauthorized
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+        404:
+          description: Analysis not found
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/notFound'
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+
+#PAYMENT
+  /products:
+    get:
+      tags:
+        - Payment
+      summary: Get all products
+      description: Get all products
+      security: []
+      responses:
+        200:
+          description: products succesfully retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "stripe_product_id"
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+  /price/{id}:
+    get:
+      tags:
+        - Payment
+      summary: Get price by id
+      description: Get price by id
+      security: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            example: "stripe_price_id"
+          required: true
+          description: The id of the price
+      responses:
+        200:
+          description: price succesfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: "stripe_price_id"
+                  active:
+                    type: boolean
+                    example: true
+                  product:
+                    type: string
+                    example: "stripe_product_id"
+                  unit_amount:
+                    type: number
+                    example: 1000
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+  /customer_portal:
+    get:
+      tags:
+        - Payment
+      summary: Get stripe customer portal
+      description: Get stripe customer portal
+      responses:
+        302:
+          description: Redirect to stripe customer portal url
+          headers:
+            Location:
+              description: The URL to redirect to
+              schema:
+                type: string
+        500:
+          description: Internal Server Error
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "Internal Server Error"
+  /create_payment:
+    post:
+      tags:
+        - Payment
+      summary: Create a payment
+      description: Create a payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: "stripe_item_id"
+                      quantity:
+                        type: number
+                        format: int32
+                        example: 1
+      responses:
+        200:
+          description: Redirect to stripe checkout url
+          content:
+            plain/text:
+              schema:
+                type: string
+                example: "url"
+        400:
+          description: Can't create payment
+          content:
+            plain/text:
+              schema:
+                $ref: '#/components/schemas/badRequest'
+            
+
+components:
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+  schemas:
+    analysis:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "3ab49c23-120b-4294-89df-27ad88deaf15"
+        filename:
+          type: string
+          example: "filename.pdf"
+        analyzed:
+          type: boolean
+          example: true
+        analyse_data:
+          type: object
+          properties:
+            project_list:
+              type: array
+              items:
+                type: object
+                properties:
+                  project_name:
+                    type: string
+                    example: "Project name"
+                  result:
+                    type: string
+                    example: "Trés probablement R&D"
+                  montant_pred_:
+                    type: number
+                    example: 100
+        budget:
+          type: number
+          example: 100
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    user-public:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "3ab49c23-120b-4294-89df-27ad88deaf15"
+        email:
+          type: string
+          format: email
+          example: "test@gmail.com"
+        name:
+          type: string
+          example: "John Doe"
+        company:
+          type: string
+          example: "Company name"
+        credit:
+          type: number
+          example: 10
+        company_type:
+          type: string
+          example: "Startup"
+        phone:
+          type: string
+          example: "+33612345678"
+        address:
+          type: string
+          example: "1 rue de la paix"
+        email_verified:
+          type: boolean
+          example: true
+    badRequest:
+      type: string
+      example: "Bad Request"
+    unauthorized:
+      type: string
+      example: "Unauthorized, please provide JWT token"
+    notFound:
+      type: string
+      example: "Not Found"

@@ -1,0 +1,29 @@
+version: '3'
+services:
+  mailservice:
+    image: mailhog/mailhog:latest
+    restart: always
+    ports:
+      - 0.0.0.0:1025:1025
+      - 0.0.0.0:8025:8025
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=sam_db
+    volumes:
+      - 'sam_db_data:/var/lib/postgresql/data'
+    ports:
+      - '0.0.0.0:5432:5432'
+  backend:
+    build: .
+    env_file:
+      - .docker.env
+    ports:
+      - '0.0.0.0:5005:80'
+    depends_on:
+      - database
+      - mailservice
+volumes:
+  sam_db_data:
